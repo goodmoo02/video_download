@@ -43,6 +43,7 @@ How to use:
 
     - TWITCH TV -
     ex) python general.py stream --url https://www.twitch.tv/leehunnyeo --name luda (default - streamer id)
+    => url is stream url and make directory with name "streamer id" and download option name or if you don't insert name, streamer is name.
     
     - afreecatv -
     ex) python general.py stream --url http://play.afreecatv.com/pi0314/225784567 --name 
