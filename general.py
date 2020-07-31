@@ -33,23 +33,31 @@ def youtube_download(url, direc=""):
 
 def stream_download(url, name=""):
     '''
-    download streaming video
+    download streaming video in
     :param  url: stream_url
            name: file_name
     '''
+
+    ## default directory ##
     dir_name = "."
-    if name == "":
-        if "twitch" in url:
-            split_list = url.split('/')
+
+    ## classify stream services ##
+    # TWITCH TV #
+    if "twitch" in url:
+        split_list = url.split('/')
+        dir_name = split_list[split_list.index("www.twitch.tv") + 1]
+        if name == "":
             name = split_list[split_list.index("www.twitch.tv") + 1]
             print(name)
-    if "afreecatv" in url:
+    # afreecatv #
+    elif "afreecatv" in url:
         res = requests.get(url)
         bs_html = BeautifulSoup(res.text, "html.parser")
         dir_name = bs_html.find('div', {"class": "nickname"}).get_text()
         if name == "":
             name = bs_html.find('meta', {'property': 'og:title'}).get("content")
-    if "huya" in url:
+    # huya.com #
+    elif "huya" in url:
         res = requests.get(url)
         bs_html = BeautifulSoup(res.text, "html.parser")
         print(bs_html)
@@ -65,40 +73,32 @@ def stream_download(url, name=""):
     subprocess.call(["ffmpeg", "-i", stream_url, "-c", "copy", dir_name + "/" + name + '.mkv'])
 
 
-# if __name__ == '__main__':
-#     import argparse
-#
-#     # Parse command line arguments
-#     parser = argparse.ArgumentParser(
-#         description='command your website')
-#     parser.add_argument("service",
-#                         metavar="<service>",
-#                         help="command 'youtube' or 'stream'")
-#
-#     parser.add_argument("--url",
-#                         metavar="<url>",
-#                         help="'website'")
-#
-#     parser.add_argument('--name', required=False,
-#                         default=".",
-#                         metavar="<name>",
-#                         help="directory or file name")
-#     args = parser.parse_args()
-#
-#     # Validate arguments
-#     url = args.url
-#     name = args.name
-#     if args.service == "youtube":
-#         print("youtube")
-#         youtube_download(url, name)
-#     elif args.service == "stream":
-#         print("stream")
-#         stream_download(url, name)
+if __name__ == '__main__':
+    import argparse
 
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description='command your website')
+    parser.add_argument("service",
+                        metavar="<service>",
+                        help="command 'youtube' or 'stream'")
 
-url = "https://www.huya.com/52715"
+    parser.add_argument("--url",
+                        metavar="<url>",
+                        help="'website'")
 
+    parser.add_argument('--name', required=False,
+                        default=".",
+                        metavar="<name>",
+                        help="directory or file name")
+    args = parser.parse_args()
 
-# dir_name = bs_html.find('div', {"class": "nickname"}).get_text()
-
-# stream_download("https://www.twitch.tv/leehunnyeo/clip/EnjoyableNimbleNoodleDatBoi?filter=clips&range=30d&sort=time")
+    # Validate arguments
+    url = args.url
+    name = args.name
+    if args.service == "youtube":
+        print("youtube")
+        youtube_download(url, name)
+    elif args.service == "stream":
+        print("stream")
+        stream_download(url, name)
