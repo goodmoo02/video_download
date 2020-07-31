@@ -21,7 +21,7 @@ How to use:
 3. Input the command
   if you want youtube_download:
    
-   python general.py youtube --url "youtube_video or youtube_channel or playlist url" --name "download directory 
+  python general.py youtube --url "youtube_video or youtube_channel or playlist url" --name "download directory 
                                                                                               (defalut= video - current directory / youtube_channel or playlist - title)
                                                                                               
     - YOUTUBE VIDEO -
