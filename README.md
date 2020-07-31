@@ -23,6 +23,7 @@ How to use:
    
    python general.py youtube --url "youtube_video or youtube_channel or playlist url" --name "download directory 
                                                                                               (defalut= video - current directory / youtube_channel or playlist - title)
+                                                                                              
     - YOUTUBE VIDEO -
     ex) python general.py youtube --url https://www.youtube.com/watch?v=TgOu00Mf3kI --name IU
     => new directory "IU" is created and download IU video in directory "IU"
