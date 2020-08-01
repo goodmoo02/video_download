@@ -16,7 +16,7 @@ def youtube_download(url, direc=""):
     '''
 
     ## download youtube-dl.exe ##
-    utils.download_youtube_dl(direc)
+    utils.download_youtube_dl()
 
     ## if download channel or playlist videos and no option direc, use title for directory name
     if ("/channel/" or "/playlist?list=" in url) and direc == "":
